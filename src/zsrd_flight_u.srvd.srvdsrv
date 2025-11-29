@@ -1,0 +1,16 @@
+@EndUserText.label: 'Service def for flight : Unmanaged'
+define service ZSRD_FLIGHT_U {
+  expose ZP_UM_TRAVEL_GH_M;
+  expose ZP_UM_BOOKING_GH_M;
+  expose /DMO/I_Supplement       as Supplement;
+  expose /DMO/I_SupplementText   as SupplementText;
+  expose /DMO/I_Customer         as Passenger;
+  expose /DMO/I_Agency           as TravelAgency;
+  expose I_Currency              as Currency;
+  expose I_Country               as Country;
+  expose /DMO/I_Carrier          as Airline;
+  expose /DMO/I_Connection       as FlightConnection;
+  expose /DMO/I_Flight           as Flight;
+  expose /DMO/I_Airport          as Airport;
+  expose /DMO/I_Travel_Status_VH as TravelStatusVH;
+}

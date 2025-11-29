@@ -1,0 +1,115 @@
+@Metadata.layer: #CORE
+//Annotation for Header
+@UI.headerInfo: {
+    typeName: 'Booking',
+    typeNamePlural: 'Bookings',
+    title: {
+        type: #STANDARD,
+        label: 'Booking Title',
+        value: 'BookingId'
+    },
+    description: {
+        type: #STANDARD,
+        label: 'Booking Description'
+    }
+}
+//Annotation to make the CDS searchable
+@Search.searchable: true
+annotate entity ZP_UM_BOOKING_GH_M with
+{
+  //To create Facet for booking suppl
+  @UI.facet: [{ position: 10 ,
+                id: 'Booking_id',
+                label: 'Booking detail Label',
+                type: #IDENTIFICATION_REFERENCE,
+                purpose: #STANDARD}]
+
+  @Search.defaultSearchElement: true
+  @Search.fuzzinessThreshold: 0.8
+  TravelId;
+  @UI:{ lineItem: [{ position: 20 }],
+       identification: [{ position: 10 }]}
+
+  @Search.defaultSearchElement: true
+  @Search.fuzzinessThreshold: 0.8
+  BookingId;
+  @UI:{ lineItem: [{ position: 30 }] ,
+        identification: [{ position: 20 }] }
+  BookingDate;
+  @UI:{ lineItem: [{ position: 40 }] ,
+        identification: [{ position: 30 }] }
+
+  @Search.defaultSearchElement: true
+  @Search.fuzzinessThreshold: 0.8
+
+  //Annotation To add Value help
+  @Consumption.valueHelpDefinition: [{ entity : {  name: '/DMO/I_Customer',
+                                                   element: 'CustomerID' } }]
+  CustomerId;
+  @UI:{ lineItem: [{ position: 50 }] ,
+        identification: [{ position: 40 }] }
+
+  //Annotation To add Value help
+  @Consumption.valueHelpDefinition: [{ entity : {  name: '/DMO/I_Carrier',
+                                                   element: 'AirlineID' } }]
+  AirlineID;
+  @UI:{ lineItem: [{ position: 60 }],
+       identification: [{ position: 50 }] }
+
+  //Annotation To add Value help
+  @Consumption.valueHelpDefinition: [{ entity : {  name: '/DMO/I_Flight',
+                                                   element: 'ConnectionID'
+                                                 },
+   // Subannotation to provide Additional Binding.It will filter the data of saerch help based on element
+  //   Element -> Name of filtering field in value help source from its comming
+  //   LocalElement -> Name of filtering field from local CDS itself
+                                       additionalBinding: [{ element: 'AirlineID',
+                                                             localElement: 'AirlineID'},
+
+                                                           { element: 'ConnectionID',
+                                                             localElement: 'ConnectionID'},
+
+                                                           { element: 'CurrencyCode',
+                                                             localElement: 'CurrencyCode'},
+
+                                                           { element: 'Price',
+                                                             localElement: 'FlightPrice'}
+                                                           ] }]
+  ConnectionId;
+  @UI:{ lineItem: [{ position: 70 }],
+        identification: [{ position: 60 }] }
+
+  //Annotation To add Value help
+  @Consumption.valueHelpDefinition: [{ entity : {  name: '/DMO/I_Flight',
+                                                   element: 'FlightDate'
+                                                 },
+   // Subannotation to provide Additional Binding.It will filter the data of saerch help based on element
+  //   Element -> Name of filtering field in value help source from its comming
+  //   LocalElement -> Name of filtering field from local CDS itself
+                                       additionalBinding: [{ element: 'AirlineID',
+                                                             localElement: 'AirlineID'},
+
+                                                           { element: 'ConnectionID',
+                                                             localElement: 'ConnectionID'},
+
+                                                           { element: 'CurrencyCode',
+                                                             localElement: 'CurrencyCode'},
+
+                                                           { element: 'Price',
+                                                             localElement: 'FlightPrice'}
+                                                           ] }]
+  FlightDate;
+  @UI:{ lineItem: [{ position: 80 }],
+        identification: [{ position: 70 }] }
+  FlightPrice;
+  //Annotation To add Value help
+  @Consumption.valueHelpDefinition: [{ entity : {  name: 'I_Currency',
+                                                   element: 'Currency' } }]
+  CurrencyCode;
+  //  /* Associations */
+  //  _carrier;
+  //  _conn;
+  //  _cust;
+  //  _travel;
+
+}

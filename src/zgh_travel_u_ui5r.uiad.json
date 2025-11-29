@@ -1,0 +1,34 @@
+{
+  "formatVersion": "2",
+  "header": {
+    "description": "TRAVEL APP",
+    "originalLanguage": "en",
+    "abapLanguageVersion": "cloudDevelopment"
+  },
+  "generalInformation": {
+    "appType": "ui5",
+    "catalogId": "SAP_TC_UI5_REPO_UIAD",
+    "targetMappingTitle": "TRAVEL"
+  },
+  "ui5AppDetails": {
+    "appId": "zumtravel_gh"
+  },
+  "navigation": {
+    "targetMappingId": "UI5R_2750BAD93295CAEB9788A45E5F119FAA9CBEEDD3_TM",
+    "semanticObject": "ZGH_TRAVEL",
+    "action": "ZTRAVE:",
+    "desktop": true,
+    "tablet": true,
+    "phone": true
+  },
+  "tiles": [
+    {
+      "id": "UI5R_2750BAD93295CAEB9788A45E5F119FAA9CBEEDD3_AL",
+      "tileType": "static",
+      "isDefault": true,
+      "standard": {
+        "title": "TRAVEL"
+      }
+    }
+  ]
+}

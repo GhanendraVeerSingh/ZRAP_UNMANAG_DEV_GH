@@ -1,0 +1,110 @@
+@Metadata.layer: #CORE
+@Search.searchable: true
+//TO give Header information
+@UI.headerInfo: {
+    typeName: 'Travel_single',
+    typeNamePlural: 'Travels',
+    title: {
+        type: #STANDARD,
+        label: 'Travel_title',
+        value: 'TravelId'},
+    description: {
+        type: #STANDARD,
+        label: 'Travel_description'}
+}
+annotate entity ZP_UM_TRAVEL_GH_M with
+{
+  // To add the facet
+  @UI.facet: [{ id: 'Travel',
+                position: 10,
+                label: 'Travel_detail',
+                purpose: #STANDARD,
+                type: #IDENTIFICATION_REFERENCE },
+
+                { id : 'Booking',
+                  position: 20,
+                  label: 'Booking_label',
+                  purpose: #STANDARD,
+                  type: #LINEITEM_REFERENCE,
+                  targetElement: '_booking' }]
+
+  @UI:{ lineItem: [{ position: 10 }],
+        identification: [{ position: 10 }] }
+  @Search: { defaultSearchElement: true,
+             fuzzinessThreshold: 0.8 }
+  TravelId;
+
+  @UI: { lineItem:  [{ position: 20 },
+  //  Annotation to define Action button at List Item level
+                     { type: #FOR_ACTION,
+                       dataAction: 'copyTravel',
+                       label: 'Copy Travel' }] ,
+         selectionField: [{ position: 10  }],
+         identification: [{ position: 20 }] }
+
+  @Search: { defaultSearchElement: true,
+             fuzzinessThreshold: 0.8 }
+
+  @Consumption.valueHelpDefinition: [{ entity: {
+                  name: '/DMO/I_Agency',
+                  element: 'AgencyID' }
+                    }]
+  AgencyId;
+//  agencyName;
+  @UI.lineItem: [{ position: 30 }]
+  @UI.selectionField: [{ position: 20  }]
+  @UI.identification: [{ position: 30 }]
+
+  @Consumption.valueHelpDefinition: [{ entity: {
+                  name: '/DMO/I_Customer',
+                  element: 'CustomerID' }
+                    }]
+  CustomerId;
+ 
+//  customerName;
+  @UI:{ lineItem: [{ position: 40 }],
+        identification: [{ position: 40 }]}
+  BeginDate;
+  @UI:{ lineItem: [{ position: 50 }],
+        identification: [{ position: 50 }]}
+  EndDate;
+   @UI.identification: [{ position: 55 }]
+  BookingFee;
+   @UI:{ lineItem: [{ position: 60 }],
+        identification: [{ position: 60 }] }
+  TotalPrice;
+  @Consumption.valueHelpDefinition: [{ entity: {
+                  name: 'I_Currency',
+                  element: 'Currency' }
+                    }]
+  CurrencyCode;
+   @UI.identification: [{ position: 65 }]
+  Description;
+   @UI: { lineItem: [{ position: 70 }],
+         selectionField: [{ position: 30  }],
+         identification: [{ position: 70 }],
+  //this sub anno indicates to display text only if we have both value along with its text
+         textArrangement: #TEXT_ONLY}
+
+  @Search: { defaultSearchElement: true,
+             fuzzinessThreshold: 0.8 }
+
+  @Consumption.valueHelpDefinition: [{ entity: {
+                  name: '/DMO/I_Overall_Status_VH',
+                  element: 'OverallStatus' }
+                    }]
+  Status;
+//  statusText;
+//  Createdby;
+//  Createdat;
+//  Lastchangedby;
+@UI.hidden: true
+  Lastchangedat;
+  //    /* Associations */
+  //    _agency;
+  //    _booking;
+  //    _curr;
+  //    _cust;
+  //    _overallstatus;
+
+}
